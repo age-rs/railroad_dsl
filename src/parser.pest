@@ -8,9 +8,11 @@ empty       = @{ "!" }
 sequence    =  { "[" ~ lbox_expr* ~ "]" }
 stack       =  { "{" ~ comma_list ~ "}" }
 choice      =  { "<" ~ comma_list ~ ">" }
+mchoice_col =  { "<" ~ comma_list ~ ">" }
+mchoice     =  { "<" ~ mchoice_col ~ ("," ~ mchoice_col)* ~ ">" }
 comma_list  = _{ lbox_expr ~ ("," ~ lbox_expr)* }
 
-simple_expr = _{ term | nonterm | comment | sequence | stack | choice | empty }
+simple_expr = _{ term | nonterm | comment | sequence | stack | mchoice | choice | empty }
 qmark       =  { "?" }
 opt_expr    =  { simple_expr ~ qmark? }
 rpt_expr    =  { opt_expr ~ ("*" ~ opt_expr)? }

@@ -26,7 +26,11 @@ fn output(outname: &str, style: &railroad::Stylesheet) -> Result<(), io::Error> 
                     "<pre>{}</pre><br>",
                     railroad::svg::encode_minimal(&buffer)
                 )?;
-                write!(outp, "<div style=\"width: {}px; height: auto; max-height: 100%, max-width: 100%\">{}</div>", diagram.width, diagram.diagram)?;
+                write!(
+                    outp,
+                    "<div style=\"width: {}px; height: auto; max-height: 100%, max-width: 100%\">{}</div>",
+                    diagram.width, diagram.diagram
+                )?;
                 outp.write_all(b"<hr>")?;
             }
         }

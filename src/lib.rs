@@ -2,8 +2,8 @@
 extern crate pest_derive;
 use railroad as rr;
 
-use pest::iterators::Pair;
 use pest::Parser;
+use pest::iterators::Pair;
 use railroad::svg;
 
 #[derive(Parser)]
@@ -54,6 +54,11 @@ fn make_node(pair: Pair<'_, Rule>) -> Box<dyn rr::Node> {
             pair.into_inner().map(make_node).collect(),
         )),
         stack => Box::new(rr::Stack::new(pair.into_inner().map(make_node).collect())),
+        mchoice => Box::new(rr::MultiChoice::new(
+            pair.into_inner()
+                .map(|column| column.into_inner().map(make_node).collect())
+                .collect(),
+        )),
         choice => Box::new(rr::Choice::new(pair.into_inner().map(make_node).collect())),
         opt_expr => binary(pair, |node, _| rr::Optional::new(node)),
         rpt_expr => binary(pair, |first, second| {
@@ -129,5 +134,35 @@ mod tests {
                 }
             }
         }
+    }
+
+    #[test]
+    fn mchoice_compiles_to_multichoice() {
+        let diagram = compile("<<'foo', 'bar'>, <'a', 'b'>>", DEFAULT_CSS).unwrap();
+        let svg = diagram.diagram.to_string();
+
+        assert!(svg.contains("class=\"multichoice\""));
+        assert!(svg.contains("foo"));
+        assert!(svg.contains("bar"));
+        assert!(svg.contains("a"));
+        assert!(svg.contains("b"));
+    }
+
+    #[test]
+    fn choice_still_compiles_to_choice() {
+        let diagram = compile("<'foo', 'bar'>", DEFAULT_CSS).unwrap();
+        let svg = diagram.diagram.to_string();
+
+        assert!(!svg.contains("class=\"multichoice\""));
+        assert!(svg.contains("class=\"choice\""));
+    }
+
+    #[test]
+    fn mchoice_columns_accept_lbox_expressions() {
+        compile(
+            "<<'foo'?, 'bar'*\",\", 'baz'#`label`>, <!, ['a' 'b']>>",
+            DEFAULT_CSS,
+        )
+        .unwrap();
     }
 }

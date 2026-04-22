@@ -7,10 +7,10 @@ description = "A small DSL to generate syntax-diagrams"
 exclude = ["examples/*.html", "examples/*.jpeg", "examples/*.png", "examples/*.svg"]
 repository = "https://github.com/lukaslueg/railroad_dsl"
 readme = "README.md"
-edition = "2021"
+edition = "2024"
 
 [dependencies]
 pest = "2.6"
 pest_derive = "2.6"
 clap = { version = "4.3", features = ["derive"]}
-railroad = { version="0.3.2", features = [ "resvg" ]}
+railroad = { version="0.3.7", features = [ "resvg" ]}

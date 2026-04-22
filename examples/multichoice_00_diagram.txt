@@ -1,0 +1,5 @@
+[`symbol` <<"!", "#", "$", "%", "&">,
+           <"*", "+", ".", "/", "<">,
+	   <"=", ">", "?", "@", "\\">,
+	   <"^", "|", "-", "~", "[">,
+	   <"]", <'UNICODE_GENERAL_CATEGORY_PUNCTUATION', 'UNICODE_GENERAL_CATEGORY_SYMBOL'>#`Non Ascii`>>*!]

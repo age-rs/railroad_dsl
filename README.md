@@ -6,6 +6,7 @@ A small DSL to generate syntax diagrams using [this library](https://github.com/
 * `{...}` is a horizontal stack of connected elements
 * `[...]` is a vertical sequence of connected elements
 * `<...>` is a choice of multiple options, exactly one of which has to be picked
+* `<<...>, <...>>` is a multi-choice, grouping choice alternatives into columns
 * `"foobar"` is a terminal
 * `'foobar'` is a non-terminal
 * `` `foobar` `` is a comment

@@ -1,4 +1,4 @@
-WHITESPACE  = _{ " " | "\t" | "\n" }
+WHITESPACE  = _{ " " | "\t" | "\n" | "\r" }
 
 term        = @{ "\"" ~ ("\\" ~ ANY | !"\"" ~ ANY)* ~ "\"" }
 nonterm     = @{ "'"  ~ ("\\" ~ ANY | !"'" ~ ANY)*  ~ "'" }

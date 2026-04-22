@@ -168,7 +168,15 @@ mod tests {
 
     #[test]
     fn whitespace_in_all_its_forms() {
-        let mut fixtures = ["'foo' 'bar'", "'foo'\t'bar'", "'foo'\n'bar'", "'foo'\r\n'bar'"].into_iter().map(|src| compile(src, DEFAULT_CSS).unwrap().diagram.to_string()).collect::<Vec<_>>();
+        let mut fixtures = [
+            "'foo' 'bar'",
+            "'foo'\t'bar'",
+            "'foo'\n'bar'",
+            "'foo'\r\n'bar'",
+        ]
+        .into_iter()
+        .map(|src| compile(src, DEFAULT_CSS).unwrap().diagram.to_string())
+        .collect::<Vec<_>>();
         let f0 = fixtures.pop().unwrap();
         for f in fixtures {
             assert_eq!(f0, f);

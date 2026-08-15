@@ -15,6 +15,10 @@ enum Format {
 enum Theme {
     Light,
     Dark,
+    Rust,
+    Coal,
+    Navy,
+    Ayu,
 }
 
 impl Theme {
@@ -22,8 +26,16 @@ impl Theme {
         match (self, fmt) {
             (Self::Light, Format::SVG) => railroad::Stylesheet::Light,
             (Self::Dark, Format::SVG) => railroad::Stylesheet::Dark,
+            (Self::Rust, Format::SVG) => railroad::Stylesheet::Rust,
+            (Self::Coal, Format::SVG) => railroad::Stylesheet::Coal,
+            (Self::Navy, Format::SVG) => railroad::Stylesheet::Navy,
+            (Self::Ayu, Format::SVG) => railroad::Stylesheet::Ayu,
             (Self::Light, Format::PNG) => railroad::Stylesheet::LightRendersafe,
             (Self::Dark, Format::PNG) => railroad::Stylesheet::DarkRendersafe,
+            (Self::Rust, Format::PNG) => railroad::Stylesheet::DarkRendersafe,
+            (Self::Coal, Format::PNG) => railroad::Stylesheet::DarkRendersafe,
+            (Self::Navy, Format::PNG) => railroad::Stylesheet::DarkRendersafe,
+            (Self::Ayu, Format::PNG) => railroad::Stylesheet::DarkRendersafe,
         }
     }
 }
